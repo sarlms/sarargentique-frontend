@@ -22,10 +22,6 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
     return re.test(String(email).toLowerCase());
   };
 
-  const backendUrl = process.env.NODE_ENV === 'production'
-  ? process.env.REACT_APP_URL_BACKEND_PROD
-  : process.env.REACT_APP_URL_BACKEND;
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -64,7 +60,7 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
       //    `   du 7 !!!
       //si vite : git de WAYNE !!!!
 
-      const response = await axios.post(`${backendUrl}/api/user/create`, userData); // Envoyez les données au backend
+      const response = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/api/user/create`, userData); // Envoyez les données au backend
       console.log(response.data); // Affichez la réponse du serveur
       setError(''); // Réinitialisez l'erreur si l'inscription est réussie
       
