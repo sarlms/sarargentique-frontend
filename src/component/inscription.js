@@ -60,7 +60,7 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
       //    `   du 7 !!!
       //si vite : git de WAYNE !!!!
 
-      const response = await axios.post(`https://sarargentique-backend.cluster-ig3.igpolytech.fr/api/user/create`, userData); // Envoyez les données au backend
+      const response = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/api/user/create`, userData); // Envoyez les données au backend
       console.log(response.data); // Affichez la réponse du serveur
       setError(''); // Réinitialisez l'erreur si l'inscription est réussie
       
