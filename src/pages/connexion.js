@@ -18,37 +18,33 @@ import axios from 'axios';
 
 const defaultTheme = createTheme();
 
-export default function Connexion({ onLogin }) {
+export default function Connexion({ onLogin, socket }) {
   const [error, setError] = React.useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
-
-    if (!email || !password) {
-      setError('Tous les champs sont obligatoires');
-      return;
-    }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/api/user/login`, { email, password });
-      console.log(response.data); // Affichez la réponse du serveur
-      setError(''); // Réinitialisez l'erreur si la connexion est réussie
+      const response = await axios.post('http://localhost:3000/api/user/login', {
+        email: data.get('email'),
+        password: data.get('password'),
+      });
+
+      // Stocker le token dans le localStorage
+      localStorage.setItem('token', response.data.token);
 
       // Appeler la fonction de gestion de la connexion avec le token JWT
-      if (response.data.token) {
+      if (typeof onLogin === 'function') {
         onLogin(response.data.token);
       }
 
-      // Rediriger vers la page d'accueil après une connexion réussie
-      navigate('/accueil');
+      // Redirigez vers la page d'accueil après une connexion réussie
+      navigate('/accueilConnecte');
     } catch (error) {
-      console.error('Error logging in user:', error);
-      const errorMessage = error.response?.data?.message || 'Erreur lors de la connexion de l\'utilisateur';
-      setError(errorMessage);
+      console.error('Erreur lors de la connexion :(', error);
+      setError('Mot de passe ou email incorrect :((');
     }
   };
 
@@ -100,17 +96,17 @@ export default function Connexion({ onLogin }) {
                 autoFocus
                 sx={{
                   '& label.Mui-focused': {
-                    color: brown[500], // Change la couleur du label lorsqu'il est en focus
+                    color: brown[500],
                   },
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: brown[500], // Change la couleur de l'encadrement du champ de saisie
+                      borderColor: brown[500],
                     },
                     '&:hover fieldset': {
-                      borderColor: brown[700], // Change la couleur de l'encadrement lorsqu'il est survolé
+                      borderColor: brown[700],
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: brown[500], // Change la couleur de l'encadrement lorsque le champ est en focus
+                      borderColor: brown[500],
                     },
                   },
                 }}
@@ -126,17 +122,17 @@ export default function Connexion({ onLogin }) {
                 autoComplete="current-password"
                 sx={{
                   '& label.Mui-focused': {
-                    color: brown[500], // Change la couleur du label lorsqu'il est en focus
+                    color: brown[500],
                   },
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: brown[500], // Change la couleur de l'encadrement du champ de saisie
+                      borderColor: brown[500],
                     },
                     '&:hover fieldset': {
-                      borderColor: brown[700], // Change la couleur de l'encadrement lorsqu'il est survolé
+                      borderColor: brown[700],
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: brown[500], // Change la couleur de l'encadrement lorsque le champ est en focus
+                      borderColor: brown[500],
                     },
                   },
                 }}
@@ -155,21 +151,6 @@ export default function Connexion({ onLogin }) {
                 se connecter
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link
-                    href="#"
-                    variant="body2"
-                    sx={{
-                      color: 'brown',
-                      textDecoration: 'underline',
-                      '&:hover': {
-                        color: 'brown',
-                      },
-                    }}
-                  >
-                    Mot de passe oublié ?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <RouterLink to="/inscription" style={{ textDecoration: 'none' }}>
                     <Link

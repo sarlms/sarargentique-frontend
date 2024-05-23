@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,69 +13,36 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
-  const [error, setError] = React.useState('');
+function Inscription({ socket }) {
+
+  const [formData, setFormData] = useState({
+    email: '',
+    pseudo: '',
+    password: '',
+    nom: '',
+    prenom: ''
+  });
+
   const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const pseudo = data.get('pseudo');
-    const password = data.get('password');
-    const confirmPassword = data.get('confirmPassword');
-    const firstName = data.get('firstName');
-    const lastName = data.get('lastName');
-
-    if (!email || !password || !confirmPassword || !firstName || !lastName || !pseudo) {
-      setError('Tous les champs sont obligatoires');
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError('Adresse email invalide');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
-      return;
-    }
-
-    const userData = {
-      email,
-      pseudo,
-      password,
-      prenom: firstName,
-      nom: lastName,
-    };
 
     try {
-      
-      //    `   du 7 !!!
-      //si vite : git de WAYNE !!!!
+      await axios.post('http://localhost:3000/api/user/signup', formData);
+      console.log('Données envoyées avec succès !');
 
-      const response = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/api/user/create`, userData); // Envoyez les données au backend
-      console.log(response.data); // Affichez la réponse du serveur
-      setError(''); // Réinitialisez l'erreur si l'inscription est réussie
-      
-      // Appeler la fonction de gestion de la connexion avec le token JWT
-      if (response.data.token) {
-        onLogin(response.data.token);
-      }
-      
-      // Rediriger vers la page d'accueil après une inscription réussie
-      navigate('/accueil');
+      navigate('/accueilConnecte');
     } catch (error) {
-      console.error('Error registering new user:', error);
-      // Afficher le message d'erreur spécifique du serveur s'il existe
-      const errorMessage = error.response?.data?.message || 'Erreur lors de l\'inscription de l\'utilisateur';
-      setError(errorMessage);
+      console.error('Erreur lors de l\'envoi des données :', error);
     }
   };
 
@@ -96,7 +63,7 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: '#ffffff', // Arrière-plan blanc
+            bgcolor: '#ffffff',
           }}
         >
           <Box
@@ -112,25 +79,30 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
               <AccountBoxRoundedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ color: '#1e2c28', mt: 2, fontWeight: 'bold' }}>
-            INSCRIPTION
+              INSCRIPTION
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              {/* Les champs de saisie pour le nom, prénom et pseudo */}
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
+                id="prenom"
                 label="Prénom"
-                name="firstName"
+                name="prenom"
+                autoFocus
+                value={formData.prenom}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="lastName"
+                id="nom"
                 label="Nom"
-                name="lastName"
+                name="nom"
+                autoComplete="family-name"
+                value={formData.nom}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
@@ -139,8 +111,10 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
                 id="pseudo"
                 label="Pseudo"
                 name="pseudo"
+                autoComplete="username"
+                value={formData.pseudo}
+                onChange={handleChange}
               />
-              {/* Les champs de saisie pour l'email et le mot de passe */}
               <TextField
                 margin="normal"
                 required
@@ -149,6 +123,8 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
                 label="Adresse Email"
                 name="email"
                 autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
@@ -158,7 +134,9 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
                 label="Mot de passe"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
+                value={formData.password}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
@@ -169,17 +147,17 @@ function Inscription({ onLogin }) { // onLogin pour gérer le token JWT
                 type="password"
                 id="confirmPassword"
                 autoComplete="current-password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
               />
-              {error && <Typography color="error" variant="body2">{error}</Typography>}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 2, mb: 2, bgcolor: '#283b39', '&:hover': { bgcolor: '#1e2c28' } }} // Bouton vert foncé
+                sx={{ mt: 2, mb: 2, bgcolor: '#283b39', '&:hover': { bgcolor: '#1e2c28' } }}
               >
                 S'inscrire
               </Button>
-              {/* Le lien pour retourner à la page de connexion */}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="/connexion" variant="body2" sx={{ color: '#1e2c28' }}>

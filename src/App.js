@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Connexion from './pages/connexion';
 import Inscription from './pages/inscription';
 import Accueil from './pages/accueil';
+import AccueilConnecte from './pages/accueilConnecte';  
 //import Localisation from './component/localisation';
 import Pellicule from './pages/pellicule';
 //import Shop from './component/shop';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/accueil" element={<Accueil />} />
+        <Route path="/accueilConnecte" element={<AccueilConnecte />} />
         {/* <Route path="/localisation" element={<Localisation />} /> */}
         <Route path="/pellicule" element={<Pellicule />} />
         {/* <Route path="/shop" element={<Shop />} />
