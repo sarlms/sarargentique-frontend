@@ -1,12 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import NavBar from '../component/navbar';
 
 const StyledRouterLink = styled(RouterLink)(({ theme }) => ({
   color: 'white',
@@ -52,19 +49,7 @@ const GlitchText = styled(Typography)({
 const Accueil = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "#965242" }}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <RouterLink to="/accueil">
-            <img src="https://i.imgur.com/1N3I3E4.png" alt="Logo" style={{ width: '300px', marginRight: '20px' }} />
-          </RouterLink>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <StyledRouterLink to="/pellicule">PELLICULES</StyledRouterLink>
-          </Box>
-          <Typography component="div">
-            <StyledRouterLink to="/connexion" style={{ marginRight: '20px'}}>SE CONNECTER</StyledRouterLink>
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <NavBar/>
       <GlitchText variant="h1" data-text="L’argentique, comment ça marche ?">
         L’argentique, comment ça marche ?
       </GlitchText>

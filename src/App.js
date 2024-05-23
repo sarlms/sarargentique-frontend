@@ -1,20 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Connexion from './component/connexion';
-import Inscription from './component/inscription';
-import Accueil from './component/accueil';
+import Connexion from './pages/connexion';
+import Inscription from './pages/inscription';
+import Accueil from './pages/accueil';
 //import Localisation from './component/localisation';
-import Pellicule from './component/pellicule';
+import Pellicule from './pages/pellicule';
 //import Shop from './component/shop';
 //import Panier from './component/panier';
-import FeatureProduct from './component/featureProduct';
+import FeatureProduct from './pages/featureProduct';
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/connexion" />} />
+        <Route path="/" element={<Navigate to="/accueil" />} />
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/accueil" element={<Accueil />} />
