@@ -12,7 +12,7 @@ const StyledRouterLink = styled(RouterLink)(({ theme }) => ({
   '&:hover': {
     textDecoration: 'underline',
   },
-  fontFamily: 'Grafton, sans-serif',
+  fontFamily: 'Bungee, sans-serif',
 }));
 
 const GlitchText = styled(Typography)({

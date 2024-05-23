@@ -4,11 +4,8 @@ import Connexion from './pages/connexion';
 import Inscription from './pages/inscription';
 import Accueil from './pages/accueil';
 import AccueilConnecte from './pages/accueilConnecte';  
-//import Localisation from './component/localisation';
 import Pellicule from './pages/pellicule';
-//import Shop from './component/shop';
-//import Panier from './component/panier';
-import FeatureProduct from './pages/featureProduct';
+import PelliculeDetail from './pages/pelliculeDetail';
 
 
 function App() {
@@ -20,11 +17,8 @@ function App() {
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/accueil" element={<Accueil />} />
         <Route path="/accueilConnecte" element={<AccueilConnecte />} />
-        {/* <Route path="/localisation" element={<Localisation />} /> */}
         <Route path="/pellicule" element={<Pellicule />} />
-        {/* <Route path="/shop" element={<Shop />} />
-        <Route path="/panier" element={<Panier />} /> */}
-        <Route path="/featureProduct" element={<FeatureProduct />} />
+        <Route path="/pelliculeDetail" element={<PelliculeDetail />} />
       </Routes>
     </Router>
   );

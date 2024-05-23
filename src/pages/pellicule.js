@@ -1,34 +1,48 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import { Link as RouterLink } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import FeatureProduct from "./featureProduct";
-import NavBar from "../component/navbar";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import NavBar from '../component/navbar';
+import './pellicule.css'; // Importer le fichier CSS
 
+function Pellicule() {
+  const [pellicules, setPellicules] = useState([]); // State pour stocker les pellicules
 
-const StyledRouterLink = styled(RouterLink)(({ theme }) => ({
-  color: 'white',
-  marginRight: '20px',
-  textDecoration: 'none',
-  '&:hover': {
-    textDecoration: 'underline',
-  },
-  fontFamily: 'Grafton, sans-serif',
-}));
+  useEffect(() => {
+    // Fonction pour récupérer toutes les pellicules
+    const fetchPellicules = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/pellicule');
+        setPellicules(response.data); // Mettre à jour le state avec les données des pellicules
+      } catch (error) {
+        console.error('Error fetching pellicules:', error);
+      }
+    };
 
-const Pellicule = () => {
-    return (
-      <Box sx={{ flexGrow: 1 }}>
+    fetchPellicules();
+  }, []);
+
+  return (
+    <div>
       <NavBar/>
-        <h2 className="text-muted text-center mt-4 mb-3">New Arrival</h2>
-        <div className="container pb-5 px-lg-5">
-            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5">
-            {Array.from({ length: 6 }, (_, i) => {
-                return <FeatureProduct key={i} />;
-            })}
+      <h1 className="center-title">LISTE DES PELLICULES</h1>
+      <div className="card-container">
+        {pellicules.map((pellicule) => (
+          <div 
+            key={pellicule._id} 
+            className="card" 
+          >
+            <h2 className="card-title">{pellicule.nom}</h2>
+            <p><strong>ISO :</strong> {pellicule.iso}</p>
+            <p><strong>Description :</strong> {pellicule.description}</p>
+            <p><strong>Couleur :</strong> {pellicule.couleur}</p>
+            <img src={pellicule.url} alt={pellicule.nom} />
+            <div className="button-container"> {/* Container pour le bouton */}
+              <hr className="button-line" /> {/* Trait au-dessus du bouton */}
+              <button className="photos-button">PHOTOS</button> {/* Bouton "PHOTOS" */}
             </div>
-        </div>
-        </Box>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

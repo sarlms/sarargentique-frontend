@@ -92,6 +92,22 @@ function Inscription({ socket }) {
                 autoFocus
                 value={formData.prenom}
                 onChange={handleChange}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: '#1e2c28',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -103,6 +119,22 @@ function Inscription({ socket }) {
                 autoComplete="family-name"
                 value={formData.nom}
                 onChange={handleChange}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: '#1e2c28',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -114,6 +146,22 @@ function Inscription({ socket }) {
                 autoComplete="username"
                 value={formData.pseudo}
                 onChange={handleChange}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: '#1e2c28',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -125,6 +173,22 @@ function Inscription({ socket }) {
                 autoComplete="email"
                 value={formData.email}
                 onChange={handleChange}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: '#1e2c28',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -137,6 +201,22 @@ function Inscription({ socket }) {
                 autoComplete="new-password"
                 value={formData.password}
                 onChange={handleChange}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: '#1e2c28',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -149,6 +229,22 @@ function Inscription({ socket }) {
                 autoComplete="current-password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: '#1e2c28',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e2c28',
+                    },
+                  },
+                }}
               />
               <Button
                 type="submit"
