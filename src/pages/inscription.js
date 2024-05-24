@@ -36,9 +36,11 @@ function Inscription({ socket }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log('REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL)
+
     try {
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`, formData);
-      console.log('REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL)
+      
       console.log('Données envoyées avec succès !');
 
       navigate('/accueilConnecte');
