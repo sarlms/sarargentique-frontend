@@ -1,0 +1,25 @@
+/* pelliculePhotos.css */
+
+.center-title {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+  
+  .photos-container {
+    padding: 20px;
+  }
+  
+  .photo {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .photo-legende {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1em;
+    color: #333;
+  }
+  

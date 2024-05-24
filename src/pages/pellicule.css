@@ -1,75 +1,74 @@
 /* Pellicule.css */
 
 .center-title {
-    text-align: center;
-  }
-  
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px; /* Espace entre les cartes */
-  }
-  
-  .card {
-    border: 7px solid #42240F;
-    padding: 10px;
-    margin-bottom: 25px;
-    width: calc(50% - 40px); /* Ajustement pour deux cartes par ligne avec l'espace */
-    max-width: 400px;
-    border-radius: 30px; /* Ajouter des bordures arrondies */
-    box-sizing: border-box; /* Assurer que le padding et la bordure sont inclus dans la largeur */
-  }
-  
-  .card img {
-    width: 200px;
-    display: block;
-    margin: 0 auto; /* Centrer l'image horizontalement */
-  }
-  
-  .card-title {
-    text-align: center; /* Centrer le titre de la carte */
-    margin-bottom: 25px; /* Ajouter une marge basse */
-  }
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px; /* Ajouter de l'espace en dessous du titre */
+}
 
-  .card h1 {
-    font-family: 'Helvetica', sans-serif; /* Utilisation de Bebas Neue comme police */
-  }
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px; /* Espace entre les cartes */
+}
 
-  .card h2 {
-    font-family: 'Helvetica', sans-serif; /* Utilisation de Bebas Neue comme police */
-  }
-  
-  .card {
-    font-family: 'Helvetica', sans-serif; /* Utilisation de Bebas Neue comme police pour tout le texte à l'intérieur des boxes */
-  }
+.pellicule-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(50% - 40px); /* Ajustement pour deux cartes par ligne avec l'espace */
+  max-width: 400px;
+  margin-bottom: 40px; /* Augmenter l'espace entre les lignes de box */
+  box-sizing: border-box; /* Assurer que le padding et la bordure sont inclus dans la largeur */
+}
 
-  .button-container {
-    position: relative; /* Position relative pour le positionnement absolu du bouton */
-  }
-  
-  .card {
-    position: relative; /* Ajouter une position relative */
-  }
-  
-  .photos-button {
-    background-color: #42240F; /* Couleur marron */
-    color: white; /* Couleur du texte */
-    border: none; /* Supprimer la bordure */
-    padding: 10px 20px; /* Ajouter un peu de marge autour du texte */
-    cursor: pointer; /* Afficher un curseur au survol */
-    position: absolute; /* Position absolue par rapport au container */
-    bottom: 10px; /* Placer le bouton en bas avec un léger décalage */
-    left: 50%; /* Aligner le bouton au centre horizontalement */
-    transform: translateX(-50%); /* Centrer le bouton horizontalement */
-    width: auto; /* Largeur automatique */
-  }
-  
-  .button-line {
-    position: absolute; /* Position absolue par rapport au container */
-    top: -10px; /* Décalage vers le haut */
-    width: 100%; /* Largeur égale à celle du container */
-    border-top: 1px solid #42240F; /* Trait au-dessus du bouton */
-  }
-  
-  
+.card {
+  border: 7px solid #42240F;
+  padding: 10px;
+  width: 100%;
+  border-radius: 30px; /* Ajouter des bordures arrondies */
+  box-sizing: border-box; /* Assurer que le padding et la bordure sont inclus dans la largeur */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espace entre les éléments pour les aligner uniformément */
+  flex-grow: 1; /* Permet à la carte de prendre toute la hauteur disponible */
+}
+
+.card img {
+  width: 200px;
+  display: block;
+  margin: 0 auto; /* Centrer l'image horizontalement */
+}
+
+.card-title {
+  text-align: center; /* Centrer le titre de la carte */
+  margin-bottom: 25px; /* Ajouter une marge basse */
+}
+
+.card h1, .card h2 {
+  font-family: 'Helvetica', sans-serif; /* Utilisation de Helvetica comme police */
+}
+
+.card {
+  font-family: 'Helvetica', sans-serif; /* Utilisation de Helvetica comme police pour tout le texte à l'intérieur des boxes */
+}
+
+.button-container {
+  text-align: center; /* Centrer le bouton horizontalement */
+  margin-top: 10px; /* Ajouter une marge supérieure pour séparer du contenu de la carte */
+}
+
+.photos-button {
+  background-color: #42240F; /* Couleur marron */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprimer la bordure */
+  padding: 15px 30px; /* Agrandir le bouton en augmentant le padding */
+  cursor: pointer; /* Afficher un curseur au survol */
+  font-size: 1.2em; /* Augmenter la taille du texte */
+}
+
+/* Supprimer le trait au-dessus du bouton */
+.button-line {
+  display: none;
+}

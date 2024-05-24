@@ -6,7 +6,7 @@ import Accueil from './pages/accueil';
 import AccueilConnecte from './pages/accueilConnecte';  
 import Pellicule from './pages/pellicule';
 import PelliculeDetail from './pages/pelliculeDetail';
-
+import PelliculePhotos from './pages/pelliculePhotos';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/accueilConnecte" element={<AccueilConnecte />} />
         <Route path="/pellicule" element={<Pellicule />} />
         <Route path="/pelliculeDetail" element={<PelliculeDetail />} />
+        <Route path="/pelliculePhotos/:pelliculeId" element={<PelliculePhotos />} />
       </Routes>
     </Router>
   );
