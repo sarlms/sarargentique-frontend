@@ -37,7 +37,7 @@ function Inscription({ socket }) {
     event.preventDefault();
 
     try {
-      await axios.post('http://localhost:3000/api/user/signup', formData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`, formData);
       console.log('Données envoyées avec succès !');
 
       navigate('/accueilConnecte');
