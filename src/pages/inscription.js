@@ -14,11 +14,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Inscription({ socket }) {
-
   const [formData, setFormData] = useState({
     email: '',
     pseudo: '',
     password: '',
+    confirmPassword: '',
     nom: '',
     prenom: ''
   });
@@ -32,18 +32,20 @@ function Inscription({ socket }) {
       [name]: value
     }));
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log('REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL)
+    if (formData.password !== formData.confirmPassword) {
+      console.error("Passwords do not match");
+      return;
+    }
 
     try {
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`, formData);
-      
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`, formData);
+      localStorage.setItem('token', response.data.token);
       console.log('Données envoyées avec succès !');
-
-      navigate('/accueilConnecte');
+      navigate('/accueil');
     } catch (error) {
       console.error('Erreur lors de l\'envoi des données :', error);
     }

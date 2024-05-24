@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -17,7 +17,7 @@ import axios from 'axios';
 const defaultTheme = createTheme();
 
 export default function Connexion({ onLogin, socket }) {
-  const [error, setError] = React.useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -25,7 +25,7 @@ export default function Connexion({ onLogin, socket }) {
     const data = new FormData(event.currentTarget);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/user/login', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/login`, {
         email: data.get('email'),
         password: data.get('password'),
       });
@@ -38,8 +38,8 @@ export default function Connexion({ onLogin, socket }) {
         onLogin(response.data.token);
       }
 
-      // Redirigez vers la page d'accueil après une connexion réussie
-      navigate('/accueilConnecte');
+      // Rediriger vers la page d'accueil après une connexion réussie
+      navigate('/accueil');
     } catch (error) {
       console.error('Erreur lors de la connexion :(', error);
       setError('Mot de passe ou email incorrect :((');

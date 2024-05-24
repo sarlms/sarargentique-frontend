@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../component/navbar';
-import './pellicule.css'; // Importer le fichier CSS
+import './pellicules.css'; // Importer le fichier CSS
 
 function Pellicule() {
   const [pellicules, setPellicules] = useState([]); // State pour stocker les pellicules
