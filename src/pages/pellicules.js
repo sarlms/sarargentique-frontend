@@ -29,7 +29,7 @@ function Pellicule() {
   return (
     <div>
       <NavBar/>
-      <h1 className="center-title">LISTE DES PELLICULES</h1>
+      <h1 className="center-title" data-content="LES PELLICULES">LES PELLICULES</h1>
       <div className="card-container">
         {pellicules.map((pellicule) => (
           <div key={pellicule._id} className="pellicule-box">

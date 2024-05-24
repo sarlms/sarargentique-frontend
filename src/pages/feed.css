@@ -1,0 +1,55 @@
+/* feed.css */
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+@import url('https://fonts.cdnfonts.com/css/avrile-sans-condensed');
+
+.center-title {
+  position: relative; /* Position relative pour permettre le positionnement absolu des pseudo-éléments */
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px; /* Ajouter de l'espace en dessous du titre */
+  font-family: 'Bebas Neue', sans-serif; /* Utilisation de la police Bebas Neue pour le titre */
+  font-size: 8em; /* Taille du texte */
+  color: #ffffff; /* Couleur du texte */
+  text-shadow:
+    3px 3px 0 #42240F,
+    -3px 3px 0 #42240F,
+    -3px -3px 0 #42240F,
+    3px -3px 0 #42240F; /* Créer un effet de contour avec un ombrage */
+}
+
+.sub-title{
+    position: relative; /* Position relative pour permettre le positionnement absolu des pseudo-éléments */
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px; /* Ajouter de l'espace en dessous du titre */
+    font-family: 'Avrile Sans Condensed', sans-serif; /* Utilisation de la police Bebas Neue pour le titre */
+    font-size: 3em; /* Taille du texte */
+    color: #DD4C2E; /* Couleur du texte */
+}
+
+.description{
+    position: relative; /* Position relative pour permettre le positionnement absolu des pseudo-éléments */
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 60px; /* Ajouter de l'espace en dessous du titre */
+    font-family: 'Avrile Sans Condensed', sans-serif; /* Utilisation de la police Bebas Neue pour le titre */
+    font-size: 2em; /* Taille du texte */
+    color: #42240F; /* Couleur du texte */
+}
+
+.photos-container { 
+  padding: 20px;
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo-legende {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1em;
+  color: #333;
+}

@@ -8,7 +8,10 @@ const Profil = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('useEffect exécuté'); // Log au début de useEffect
+
     const fetchUserData = async () => {
+      console.log('fetchUserData appelé'); // Log au début de fetchUserData
       const token = localStorage.getItem('token');
       console.log('Token récupéré :', token); // Log du token
 
@@ -39,6 +42,7 @@ const Profil = () => {
   if (!user) {
     return <div>Chargement...</div>;
   }
+
 
   return (
     <div className="profil-container">

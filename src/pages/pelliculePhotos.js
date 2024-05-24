@@ -39,7 +39,7 @@ function PelliculePhotos() {
     <div>
       <NavBar />
       <h1 className="center-title">
-        {pellicule ? `Photos for Pellicule: ${pellicule.nom}` : 'Loading...'}
+        {pellicule ? `${pellicule.nom}` : 'Loading...'}
       </h1>
       <div className="photos-container">
         {photos.length === 0 ? (

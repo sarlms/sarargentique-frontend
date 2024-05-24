@@ -32,6 +32,7 @@ export default function Connexion({ onLogin, socket }) {
 
       // Stocker le token dans le localStorage
       localStorage.setItem('token', response.data.token);
+      console.log('Token stocké dans localStorage :', response.data.token);
 
       // Appeler la fonction de gestion de la connexion avec le token JWT
       if (typeof onLogin === 'function') {

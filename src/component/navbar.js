@@ -26,7 +26,7 @@ const NavBar = () => {
           <RouterLink to="/feed">
             <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/feed.png" alt="Feed" style={{ width: '55px', marginRight: '25px' }} />
           </RouterLink>
-          {isAuthenticated ? (
+          {/*{isAuthenticated ? (
             <RouterLink to="/profil">
               <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/profil.png" alt="Profil" style={{ width: '150px', marginRight: '10px' }} />
             </RouterLink>
@@ -34,7 +34,10 @@ const NavBar = () => {
             <RouterLink to="/connexion">
               <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/connecter.png" alt="Se Connecter" style={{ width: '150px', marginRight: '10px' }} />
             </RouterLink>
-          )}
+          )}*/}
+          <RouterLink to="/connexion">
+            <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/connecter.png" alt="Se Connecter" style={{ width: '150px', marginRight: '10px' }} />
+          </RouterLink>
         </div>
       </Toolbar>
     </AppBar>

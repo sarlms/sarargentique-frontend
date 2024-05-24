@@ -4,6 +4,9 @@ import Typography from '@mui/material/Typography';
 import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import NavBar from '../component/navbar';
+import './avrile-sans-condensed.css';
+import './bebas-neue.css';
+
 
 const StyledRouterLink = styled(RouterLink)(({ theme }) => ({
   color: 'white',
@@ -12,13 +15,13 @@ const StyledRouterLink = styled(RouterLink)(({ theme }) => ({
   '&:hover': {
     textDecoration: 'underline',
   },
-  fontFamily: 'Bungee, sans-serif',
+  fontFamily: 'Bebas Neue',
 }));
 
 const GlitchText = styled(Typography)({
-    fontFamily: 'Bungee, sans-serif',
+    fontFamily: 'Bebas Neue',
     color: '#42240F',
-    fontSize: '4rem',
+    fontSize: '5rem',
     marginTop: '100px',
     position: 'absolute',
     textAlign: 'center',
@@ -62,7 +65,7 @@ const Accueil = () => {
                 width={400}
                 height={450}
             />
-            <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5 }}>
+            <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5, fontFamily: 'Avrile Sans Condensed, sans-serif'}}>
             Dans le monde de la photographie, l'appareil photo argentique conserve une place spéciale, offrant une expérience unique et un charme vintage inimitable. Son fonctionnement repose sur des principes simples mais essentiels, qui capturent l'essence même de la photographie analogique. L'essentiel d'un appareil photo argentique réside dans son processus de capturer et d'immortaliser des moments sur un support physique, le film. Chaque composant de cet appareil, des objectifs à l'obturateur, travaille en harmonie pour créer des images qui sont gravées dans l'histoire photographique.
             </Typography>
         </Box>
@@ -70,7 +73,7 @@ const Accueil = () => {
 
         {/* TEXTE --- PHOTO */}
         <Box sx={{ mt: 6, display: 'flex', flexDirection: { xs: 'column-reverse', sm: 'row' }, alignItems: 'center', gap: 9 }}>
-            <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5 }}>
+            <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5, fontFamily: 'Avrile Sans Condensed, sans-serif' }}>
             L'objectif, tel l'œil de l'appareil, concentre la lumière provenant de la scène à photographier. Associé à un diaphragme et un obturateur, il ajuste la quantité de lumière et la durée d'exposition pour créer une image nette et bien exposée. Le viseur, fenêtre sur le monde, offre au photographe une perspective unique pour composer son image. Qu'il s'agisse d'un viseur optique ou électronique, il permet de visualiser la scène et de capturer l'instant avec précision.
             </Typography>
             <img
@@ -91,7 +94,7 @@ const Accueil = () => {
                 width={300}
                 height={550}
             />
-            <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5 }}>
+            <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5, fontFamily: 'Avrile Sans Condensed, sans-serif' }}>
             Le film, élément crucial de la photographie argentique, est chargé dans l'appareil avec soin. Sensible à la lumière, il enregistre chaque photon qui le frappe, capturant ainsi l'essence même de la scène à photographier. Le déclencheur, lien entre le photographe et son sujet, déclenche l'obturateur pour capturer l'image. C'est à ce moment précis que la magie opère, figeant l'instant pour l'éternité. Après la prise de vue, le film est avancé pour exposer une nouvelle portion de pellicule, prêt à capturer de nouveaux souvenirs. Une fois toutes les images capturées, le film est soigneusement rembobiné, prêt à être développé et révélé.
             </Typography>
         </Box>
@@ -99,7 +102,7 @@ const Accueil = () => {
 
     {/* TEXTE --- PHOTO */}
     <Box sx={{ mt: 6, display: 'flex', flexDirection: { xs: 'column-reverse', sm: 'row' }, alignItems: 'center', gap: 9 }}>
-        <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5 }}>
+        <Typography variant="body1" sx={{ flex: 1, textAlign: 'justify', fontSize: '1rem', lineHeight: 1.5, fontFamily: 'Avrile Sans Condensed, sans-serif' }}>
         Le développement du film, étape cruciale du processus, révèle les images cachées sur le film. Par une série de bains chimiques, les images prennent vie, capturant les détails et les émotions avec une clarté saisissante. Ainsi, l'appareil photo argentique transcende le simple acte de prendre une photo pour devenir une véritable œuvre d'art. Son fonctionnement, empreint de tradition et de savoir-faire, continue de captiver les passionnés de photographie à travers le monde, préservant ainsi l'héritage de la photographie analogique.
         </Typography>
         <img
