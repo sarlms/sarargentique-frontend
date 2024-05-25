@@ -1,61 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import NavBar from '../component/navbar';
+import { Checkbox, FormControlLabel } from '@material-ui/core'; // Importez Checkbox et FormControlLabel depuis @material-ui/core
 import './profil.css';
 
 const Profil = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [selectedPellicules, setSelectedPellicules] = useState([]);
+  const [isAddingPhoto, setIsAddingPhoto] = useState(false);
 
-  useEffect(() => {
-    console.log('useEffect exécuté'); // Log au début de useEffect
+  const handlePelliculeChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedPellicules([value]);
+    } else {
+      setSelectedPellicules([]);
+    }
+  };
 
-    const fetchUserData = async () => {
-      console.log('fetchUserData appelé'); // Log au début de fetchUserData
-      const token = localStorage.getItem('token');
-      console.log('Token récupéré :', token); // Log du token
+  const toggleAddPhotoForm = () => {
+    setIsAddingPhoto(!isAddingPhoto);
+  };
 
-      if (!token) {
-        console.error('Aucun token trouvé, redirection vers la page de connexion');
-        navigate('/connexion');
-        return;
-      }
-
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        console.log('Réponse de l\'API :', response.data); // Log de la réponse
-        setUser(response.data.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données utilisateur :', error);
-        navigate('/connexion');
-      }
-    };
-
-    fetchUserData();
-  }, [navigate]);
-
-  if (!user) {
-    return <div>Chargement...</div>;
-  }
-
+  const pellicules = [
+    "FUJICOLOR - C200",
+    "FUJIFILM - XTRA",
+    "KODAK - 400 TMAX",
+    "KODAK - COLORPLUS",
+    "KODAK - EKTRA",
+    "KODAK - GOLD",
+    "KODAK - PORTRA",
+    "KODAK - PRO IMAGE",
+    "KODAK - ULTRAMAX",
+    "WASHI - A",
+    "WASHI - X"
+  ];
 
   return (
-    <div className="profil-container">
-      <h1 className="profil-title">Mon Profil</h1>
-      <div className="profil-details">
-        <p><strong>Nom :</strong> {user.nom}</p>
-        <p><strong>Prénom :</strong> {user.prenom}</p>
-        <p><strong>Pseudo :</strong> {user.pseudo}</p>
-        <p><strong>Email :</strong> {user.email}</p>
-        <p><strong>Rôle :</strong> {user.role}</p>
+    <div className="page-container">
+      <NavBar />
+      <h1 className="center-title">
+        PROFIL
+      </h1>
+      <div className="profile-wrapper">
+        <div className="profile-container">
+          <div className="profile-picture">
+            <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/depositphotos_526270308-stock-illustration-smile-emotion-vector-icon-illustration.jpg" alt="Profil" />
+          </div>
+          <div className="user-info">
+            <h2>VOS INFOS</h2>
+            <p>Nom :</p>
+            <p>Prénom :</p>
+            <p>Pseudo :</p>
+            <p>Adresse email :</p>
+          </div>
+          <div className="add-photo">
+            <button onClick={toggleAddPhotoForm}>POSTER UNE PHOTO</button>
+            {isAddingPhoto && (
+              <form>
+                <div className="form-group">
+                  <input type="text" placeholder="URL" />
+                </div>
+                <div className="form-group">
+                  <input type="text" placeholder="Légende (facultatif)" />
+                </div>
+                <h3 className="film-label">Pellicule utilisée :</h3>
+                {pellicules.map(pellicule => (
+                  <div key={pellicule}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedPellicules.includes(pellicule)}
+                          onChange={handlePelliculeChange}
+                          value={pellicule}
+                          color="#DD4C2E"
+                        />
+                      }
+                      label={pellicule}
+                    />
+                  </div>
+                ))}
+                <button type="submit">Ajouter</button>
+              </form>
+            )}
+          </div>
+        </div>
+        <div className="user-photos">
+          <h2>Toutes mes photos :</h2>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default Profil;
