@@ -35,8 +35,8 @@
   align-items: center;
   background-color: rgb(255, 255, 255); /* Fond beige */
   padding: 20px;
-  border: 3px solid #42240F;
-  border-radius: 10px;
+  border: 4px solid #42240F;
+  border-radius: 200px;
   margin-bottom: 60px;
 }
 
@@ -56,7 +56,7 @@
   border: 1px solid #DD4C2E;
   border-radius: 8px;
   width: 50%; /*la largeur */
-  font-size: 1em;
+  font-size: 1.2em;
   color: #DD4C2E;
 }
 
