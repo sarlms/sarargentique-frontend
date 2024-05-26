@@ -75,7 +75,7 @@ const Feed = () => {
                   <img src={photo.photoURL} alt={photo.legende} className="photo" />
                   <div className="photo-overlay">
                     <div className="overlay-content">
-                      <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/white-heart-outline-png-png-transparent-background.png" alt="Likes" />
+                      <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/white-heart_1f90d.png" alt="Likes" />
                       <span>{photo.likesCount}</span>
                       <img src="https://static.vecteezy.com/system/resources/previews/018/887/859/non_2x/speech-bubble-icon-png.png" alt="Comments" style={{ marginLeft: '10px' }} />
                       <span>{photo.commentsCount}</span>
