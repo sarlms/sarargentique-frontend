@@ -13,23 +13,52 @@
     -3px -3px 0 #42240F,
     3px -3px 0 #42240F; /* Créer un effet de contour avec un ombrage */
 }
+.photos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.photo-container {
+  position: relative;
+  display: inline-block;
+}
 
-  
-  .photos-container { 
-    padding: 20px;
-  }
-  
-  .photo {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .photo-legende {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 1em;
-    color: #333;
-  }
-  
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: filter 0.3s ease;
+}
+
+.photo:hover {
+  filter: brightness(30%);
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-container:hover .photo-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.overlay-content img {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}

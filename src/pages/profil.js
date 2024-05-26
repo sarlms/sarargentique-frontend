@@ -78,7 +78,7 @@ const Profil = () => {
                     />
                   </div>
                 ))}
-                <button type="submit">Ajouter</button>
+                <button type="submit">POSTER</button>
               </form>
             )}
           </div>

@@ -8,6 +8,7 @@ import PelliculeDetail from './pages/pelliculeDetail';
 import PelliculePhotos from './pages/pelliculePhotos';
 import Profil from './pages/profil';
 import Feed from './pages/feed';
+import PhotoDetail from './pages/photoDetail';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/pelliculePhotos/:pelliculeId" element={<PelliculePhotos />} />
         <Route path="/profil" element={isAuthenticated ? <Profil /> : <Navigate to="/connexion" />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/photoDetail/:id" element={<PhotoDetail />} />
       </Routes>
     </Router>
   );

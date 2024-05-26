@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Masonry from '@mui/lab/Masonry';
 import { styled } from '@mui/material/styles';
-import { Typography } from '@mui/material';
 import NavBar from '../component/navbar';
 import './feed.css';
 
@@ -17,35 +17,38 @@ const Feed = () => {
     const fetchRandomPhotos = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/photo');
-        // Obtenez un sous-ensemble de 20 photos aléatoires
         const randomPhotos = response.data.sort(() => 0.5 - Math.random()).slice(0, 20);
-        setPhotos(randomPhotos);
+        setPhotos(randomPhotos); // Modification ici
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     };
-
+  
     fetchRandomPhotos();
   }, []);
 
   return (
     <div>
       <NavBar />
-      <h1 className="center-title">
-        FEED
-      </h1>
-      <h2 className="sub-title">
-        Découvrez de nouveaux photographes !
-      </h2>
-      <h2 className="description">
-        Vos 20 photos aléatoires
-      </h2>
+      <h1 className="center-title">FEED</h1>
+      <h2 className="sub-title">Découvrez de nouveaux photographes !</h2>
+      <h2 className="description">Vos 20 photos aléatoires</h2>
       <PhotoContainer>
         <Masonry columns={3} spacing={3}>
-          {photos.map((photo) => (
-            <div key={photo._id}>
-              <img src={photo.photoURL} alt={photo.legende} style={{ width: '100%', height: 'auto', display: 'block' }} />
-              {photo.legende && <Typography variant="body1" align="center" sx={{ mt: 1 }}>{photo.legende}</Typography>}
+          {photos && photos.length > 0 && photos.map((photo) => (
+            <div key={photo._id} className="photo-container">
+              <Link to={`/photoDetail/${photo._id}`}>
+                <img src={photo.photoURL} alt={photo.legende} className="photo" />
+                <div className="photo-overlay">
+                  <div className="overlay-content">
+                    <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/white-heart_1f90d.png" alt="Likes" />
+                    <span>{photo.likesCount}</span>
+                    <img src="https://static.vecteezy.com/system/resources/previews/018/887/859/non_2x/speech-bubble-icon-png.png" alt="Comments" style={{ marginLeft: '10px' }} />
+                    <span>{photo.commentsCount}</span>
+                  </div>
+                </div>
+                {photo.legende && <p className="photo-legende">{photo.legende}</p>}
+              </Link>
             </div>
           ))}
         </Masonry>

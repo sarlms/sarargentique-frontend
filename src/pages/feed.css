@@ -3,48 +3,86 @@
 @import url('https://fonts.cdnfonts.com/css/avrile-sans-condensed');
 
 .center-title {
-  position: relative; /* Position relative pour permettre le positionnement absolu des pseudo-éléments */
+  position: relative;
   text-align: center;
   margin-top: 60px;
-  margin-bottom: 20px; /* Ajouter de l'espace en dessous du titre */
-  font-family: 'Bebas Neue', sans-serif; /* Utilisation de la police Bebas Neue pour le titre */
-  font-size: 8em; /* Taille du texte */
-  color: #ffffff; /* Couleur du texte */
+  margin-bottom: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 8em;
+  color: #ffffff;
   text-shadow:
     3px 3px 0 #42240F,
     -3px 3px 0 #42240F,
     -3px -3px 0 #42240F,
-    3px -3px 0 #42240F; /* Créer un effet de contour avec un ombrage */
+    3px -3px 0 #42240F;
 }
 
-.sub-title{
-    position: relative; /* Position relative pour permettre le positionnement absolu des pseudo-éléments */
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px; /* Ajouter de l'espace en dessous du titre */
-    font-family: 'Avrile Sans Condensed', sans-serif; /* Utilisation de la police Bebas Neue pour le titre */
-    font-size: 3em; /* Taille du texte */
-    color: #DD4C2E; /* Couleur du texte */
+.sub-title {
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: 'Avrile Sans Condensed', sans-serif;
+  font-size: 3em;
+  color: #DD4C2E;
 }
 
-.description{
-    position: relative; /* Position relative pour permettre le positionnement absolu des pseudo-éléments */
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 60px; /* Ajouter de l'espace en dessous du titre */
-    font-family: 'Avrile Sans Condensed', sans-serif; /* Utilisation de la police Bebas Neue pour le titre */
-    font-size: 2em; /* Taille du texte */
-    color: #42240F; /* Couleur du texte */
+.description {
+  position: relative;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 60px;
+  font-family: 'Avrile Sans Condensed', sans-serif;
+  font-size: 2em;
+  color: #42240F;
 }
 
-.photos-container { 
+.photos-container {
   padding: 20px;
 }
 
+.photo-container {
+  position: relative;
+  display: inline-block;
+}
+
 .photo {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
+  transition: filter 0.3s ease;
+}
+
+.photo:hover {
+  filter: brightness(30%);
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-container:hover .photo-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.overlay-content img {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
 }
 
 .photo-legende {

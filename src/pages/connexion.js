@@ -145,34 +145,27 @@ export default function Connexion({ onLogin, socket }) {
               >
                 se connecter
               </Button>
-              <Grid container>
-                <Grid item>
-                  <RouterLink to="/inscription" style={{ textDecoration: 'none' }}>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      sx={{
-                        mt: 0,
-                        mb: 3,
-                        color: 'brown',
-                        textDecoration: 'underline',
-                        '&:hover': {
-                          color: 'brown',
-                        },
-                      }}
-                    >
-                      {"Pas de compte ? Inscrivez-vous !"}
-                    </Link>
-                  </RouterLink>
-                </Grid>
-              </Grid>
             </Box>
+            <RouterLink to="/inscription" style={{ textDecoration: 'none' }}>
+                  <Link
+                    component="button"
+                    variant="body2"
+                    sx={{
+                      mt: 0,
+                      mb: 1,
+                      color: 'brown !important',
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    {"Pas de compte ? Inscrivez-vous !"}
+                  </Link>
+                  </RouterLink>
             <RouterLink to="/accueil" style={{ textDecoration: 'none' }}>
               <Link
                 component="button"
                 variant="body2"
                 sx={{
-                  mt: 2,
+                  mt: 0,
                   mb: 0,
                   color: 'brown',
                   textDecoration: 'underline',
@@ -181,7 +174,7 @@ export default function Connexion({ onLogin, socket }) {
                   },
                 }}
               >
-                {"continuer sans connexion"}
+                {"Continuer sans connexion ?"}
               </Link>
             </RouterLink>
           </Box>

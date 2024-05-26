@@ -1,0 +1,32 @@
+.photo-detail {
+  max-width: 60%;
+  height: auto;
+  display: block;
+  margin: 60px auto;
+
+}
+
+
+/* photoDetail.css */
+
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.info-container {
+  border: 2px solid black;
+  padding: 20px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 40px;
+  margin-top: 0px;
+  /* Centrer horizontalement */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
