@@ -10,8 +10,8 @@ import Grid from '@mui/material/Grid';
 import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSignup } from '../hooks/useSignup';
 
 function Inscription({ socket }) {
   const [formData, setFormData] = useState({
@@ -23,7 +23,9 @@ function Inscription({ socket }) {
     prenom: ''
   });
 
+  const { signup, error, isLoading, success } = useSignup();
   const navigate = useNavigate();
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState('');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,21 +37,28 @@ function Inscription({ socket }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-    if (formData.password !== formData.confirmPassword) {
-      console.error("Passwords do not match");
+    const pseudo = data.get('pseudo');
+    const email = data.get('email');
+    const password = data.get('password');
+    const confirmPassword = data.get('confirmPassword');
+    const nom = data.get('lastName');
+    const prenom = data.get('firstName');
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError('Les mots de passe ne correspondent pas');
       return;
     }
 
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`, formData);
-      localStorage.setItem('token', response.data.token);
-      console.log('Données envoyées avec succès !');
+    setConfirmPasswordError('');
+
+    const success = await signup(pseudo, email, password, nom, prenom);
+    if (success) {
       navigate('/accueil');
-    } catch (error) {
-      console.error('Erreur lors de l\'envoi des données :', error);
     }
   };
+
 
   return (
     <ThemeProvider theme={createTheme()}>
@@ -87,193 +96,196 @@ function Inscription({ socket }) {
               INSCRIPTION
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="prenom"
-                label="Prénom"
-                name="prenom"
-                autoFocus
-                value={formData.prenom}
-                onChange={handleChange}
-                sx={{
-                  '& label.Mui-focused': {
-                    color: '#1e2c28',
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="prenom"
+              label="Prénom"
+              name="prenom"
+              autoFocus
+              value={formData.prenom}
+              onChange={handleChange}
+              sx={{
+                '& label.Mui-focused': {
+                  color: '#1e2c28',
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1e2c28',
-                    },
+                  '&:hover fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="nom"
-                label="Nom"
-                name="nom"
-                autoComplete="family-name"
-                value={formData.nom}
-                onChange={handleChange}
-                sx={{
-                  '& label.Mui-focused': {
-                    color: '#1e2c28',
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1e2c28',
-                    },
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="nom"
+              label="Nom"
+              name="nom"
+              autoComplete="family-name"
+              value={formData.nom}
+              onChange={handleChange}
+              sx={{
+                '& label.Mui-focused': {
+                  color: '#1e2c28',
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="pseudo"
-                label="Pseudo"
-                name="pseudo"
-                autoComplete="username"
-                value={formData.pseudo}
-                onChange={handleChange}
-                sx={{
-                  '& label.Mui-focused': {
-                    color: '#1e2c28',
+                  '&:hover fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1e2c28',
-                    },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Adresse Email"
-                name="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange}
-                sx={{
-                  '& label.Mui-focused': {
-                    color: '#1e2c28',
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="pseudo"
+              label="Pseudo"
+              name="pseudo"
+              autoComplete="username"
+              value={formData.pseudo}
+              onChange={handleChange}
+              sx={{
+                '& label.Mui-focused': {
+                  color: '#1e2c28',
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1e2c28',
-                    },
+                  '&:hover fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Mot de passe"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                value={formData.password}
-                onChange={handleChange}
-                sx={{
-                  '& label.Mui-focused': {
-                    color: '#1e2c28',
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1e2c28',
-                    },
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Adresse Email"
+              name="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+              sx={{
+                '& label.Mui-focused': {
+                  color: '#1e2c28',
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirmer le mot de passe"
-                type="password"
-                id="confirmPassword"
-                autoComplete="current-password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                sx={{
-                  '& label.Mui-focused': {
-                    color: '#1e2c28',
+                  '&:hover fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1e2c28',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1e2c28',
-                    },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#1e2c28',
                   },
-                }}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2, mb: 2, bgcolor: '#283b39', '&:hover': { bgcolor: '#1e2c28' } }}
-              >
-                S'inscrire
-              </Button>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="/connexion" variant="body2" sx={{ color: '#1e2c28' }}>
-                    Déjà un compte ? Connectez-vous
-                  </Link>
-                </Grid>
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Mot de passe"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              value={formData.password}
+              onChange={handleChange}
+              sx={{
+                '& label.Mui-focused': {
+                  color: '#1e2c28',
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#1e2c28',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#1e2c28',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#1e2c28',
+                  },
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirmer le mot de passe"
+              type="password"
+              id="confirmPassword"
+              autoComplete="current-password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              sx={{
+                '& label.Mui-focused': {
+                  color: '#1e2c28',
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#1e2c28',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#1e2c28',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#1e2c28',
+                  },
+                },
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 2, mb: 2, bgcolor: '#283b39', '&:hover': { bgcolor: '#1e2c28' } }}
+              disabled={isLoading}
+            >
+              S'inscrire
+            </Button>
+            {error && <div className="error" style={{ color: 'red' }}>{error}</div>}
+            {confirmPasswordError && <div className="error" style={{ color: 'red' }}>{confirmPasswordError}</div>}
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/connexion" variant="body2" sx={{ color: '#1e2c28' }}>
+                  Déjà un compte ? Connectez-vous
+                </Link>
               </Grid>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="/accueil" variant="body2" sx={{ color: '#1e2c28' }}>
-                    Continuer sans connexion ?
-                  </Link>
-                </Grid>
+            </Grid>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/accueil" variant="body2" sx={{ color: '#1e2c28' }}>
+                  Continuer sans connexion ?
+                </Link>
               </Grid>
-            </Box>
+            </Grid>
+          </Box>
           </Box>
         </Grid>
         <Grid

@@ -12,39 +12,32 @@ import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { brown } from '@mui/material/colors';
-import axios from 'axios';
-
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { useLogin } from '../hooks/useLogin';
 const defaultTheme = createTheme();
 
-export default function Connexion({ onLogin, socket }) {
-  const [error, setError] = useState('');
+export default function Connexion() {
+  const { login, error, isLoading } = useLogin();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
 
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/login`, {
-        email: data.get('email'),
-        password: data.get('password'),
-      });
+    console.log({ email, password });
 
-      // Stocker le token dans le localStorage
-      localStorage.setItem('token', response.data.token);
-      console.log('Token stocké dans localStorage :', response.data.token);
-
-      // Appeler la fonction de gestion de la connexion avec le token JWT
-      if (typeof onLogin === 'function') {
-        onLogin(response.data.token);
-      }
-
-      // Rediriger vers la page d'accueil après une connexion réussie
-      navigate('/accueil');
-    } catch (error) {
-      console.error('Erreur lors de la connexion :(', error);
-      setError('Mot de passe ou email incorrect :((');
+    const success = await login(email, password);
+    if (success) {
+      navigate('/');
     }
+  };
+
+  const handleToggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -116,7 +109,7 @@ export default function Connexion({ onLogin, socket }) {
                 fullWidth
                 name="password"
                 label="Mot de passe"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="current-password"
                 sx={{
@@ -136,15 +129,27 @@ export default function Connexion({ onLogin, socket }) {
                   },
                 }}
               />
+              <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showPassword}
+                  onChange={handleToggleShowPassword}
+                  color="primary"
+                />
+              }
+              label="Afficher le mot de passe"
+              />
               {error && <Typography color="error" variant="body2">{error}</Typography>}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, bgcolor: brown[500], '&:hover': { bgcolor: brown[700] } }}
+                disabled={isLoading}
               >
                 se connecter
               </Button>
+              {error && <div className="error" style={{ color: 'red' }}>{error}</div>}
             </Box>
             <RouterLink to="/inscription" style={{ textDecoration: 'none' }}>
                   <Link

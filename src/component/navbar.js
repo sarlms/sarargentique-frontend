@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Link as RouterLink } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useProfile } from '../hooks/useProfile';
 import Cookies from 'js-cookie';
 
 const NavBar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { user } = useAuthContext();
+  const { profile } = useProfile();
 
-  useEffect(() => {
-    // Vérifiez si un token d'authentification est présent dans les cookies ou localStorage
-    const token = localStorage.getItem('token') || Cookies.get('token');
-    setIsAuthenticated(!!token);
-  }, []);
 
   return (
     <AppBar position="static" sx={{ bgcolor: "#42240F" }}>
@@ -26,21 +24,15 @@ const NavBar = () => {
           <RouterLink to="/feed">
             <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/feed.png" alt="Feed" style={{ width: '55px', marginRight: '25px' }} />
           </RouterLink>
-          {/*{isAuthenticated ? (
+          {user ? (
             <RouterLink to="/profil">
-              <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/profil.png" alt="Profil" style={{ width: '150px', marginRight: '10px' }} />
-            </RouterLink>
-          ) : (
-            <RouterLink to="/connexion">
-              <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/connecter.png" alt="Se Connecter" style={{ width: '150px', marginRight: '10px' }} />
-            </RouterLink>
-          )}*/}
-          <RouterLink to="/connexion">
-            <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/connecter.png" alt="Se Connecter" style={{ width: '150px', marginRight: '10px' }} />
-          </RouterLink>
-          <RouterLink to="/profil">
               <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/profil.png" alt="Profil" style={{ width: '75px', marginRight: '10px' }} />
             </RouterLink>
+            ) : (
+              <RouterLink to="/connexion">
+              <img src="https://raw.githubusercontent.com/sarlms/sarargentique-pellicules-photos/main/connecter.png" alt="Se Connecter" style={{ width: '150px', marginRight: '10px' }} />
+              </RouterLink>
+            )}
         </div>
       </Toolbar>
     </AppBar>
